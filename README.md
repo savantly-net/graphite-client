@@ -1,5 +1,7 @@
-# Graphite Client
 [![Build Status](https://travis-ci.org/graphite-client/graphite-client.svg?branch=master)](https://travis-ci.org/savantly-net/graphite-client)
+
+# Graphite Client
+
 
 Use in Maven project -
 
