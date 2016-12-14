@@ -55,6 +55,7 @@ public class MockCarbonServer {
 	 * @throws InterruptedException
 	 */
 	public void stop(int wait) throws InterruptedException{
+		Thread.sleep(1000);
 		this.serverSocket.disconnect();
 		this.serverSocket.close();
 		serverThread.join(wait);

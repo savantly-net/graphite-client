@@ -3,6 +3,7 @@ package net.savantly.graphite.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,13 +15,13 @@ import net.savantly.graphite.MockCarbonServer;
 
 public class DefaultGraphiteClientTest {
 	
-
+	private Random rand = new Random();
 	private String graphiteHost = "localhost";
-	private int carbonPort = 2003;
 	private String sourceIp = "0.0.0.0";
 
 	@Test
 	public void testSaveOne() throws IOException, InterruptedException {
+		int carbonPort = rand.nextInt(1000) + 2000;
 		MockCarbonServer server = new MockCarbonServer(1, carbonPort);
 		server.start();
 		GraphiteClient client = new DefaultGraphiteClient(CarbonFactory.getDefaultCarbonSender(graphiteHost, carbonPort, sourceIp));
@@ -36,6 +37,7 @@ public class DefaultGraphiteClientTest {
 	
 	@Test
 	public void testSaveMany() throws IOException, InterruptedException {
+		int carbonPort = rand.nextInt(1000) + 2000;
 		int testSize = 50;
 		MockCarbonServer server = new MockCarbonServer(1, carbonPort);
 		server.start();
