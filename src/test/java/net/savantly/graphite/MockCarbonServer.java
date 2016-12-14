@@ -17,28 +17,8 @@ public class MockCarbonServer {
 	private final int port;
 	private List<String> history = new ArrayList<String>();
 	private int numberOfRequests;
+	private final Thread serverThread;
 
-	Thread serverThread = new Thread(new Runnable() {
-
-		byte[] receiveData = new byte[1024*3];
-
-		public void run() {
-			while (numberOfRequests > 0) {
-				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-				try {
-					serverSocket.receive(receivePacket);
-					String sentence = new String(receivePacket.getData());
-					log.info("RECEIVED: " + sentence);
-					addToHistory(sentence);
-					--numberOfRequests;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	});
-
-	
 	private void addToHistory(String sentence) {
 		this.history.add(sentence);
 	}
@@ -59,6 +39,8 @@ public class MockCarbonServer {
 	public MockCarbonServer(int numberOfRequests, int port) {
 		this.numberOfRequests = numberOfRequests;
 		this.port = port;
+		
+		serverThread = new Thread(new RunnableServer());
 	}
 
 	public void start() throws IOException {
@@ -73,6 +55,7 @@ public class MockCarbonServer {
 	 * @throws InterruptedException
 	 */
 	public void stop(int wait) throws InterruptedException{
+		this.serverSocket.disconnect();
 		this.serverSocket.close();
 		serverThread.join(wait);
 	}
@@ -83,6 +66,26 @@ public class MockCarbonServer {
 	
 	public List<String> getHistory(){
 		return Collections.unmodifiableList(this.history);
+	}
+	
+	class RunnableServer implements Runnable{
+		byte[] receiveData = new byte[1024*3];
+		
+		public void run() {
+			while (numberOfRequests > 0 && !serverSocket.isClosed()) {
+				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+				try {
+					serverSocket.receive(receivePacket);
+					String sentence = new String(receivePacket.getData());
+					log.info("RECEIVED: " + sentence);
+					addToHistory(sentence);
+					--numberOfRequests;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 
 }
