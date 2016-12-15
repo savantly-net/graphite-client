@@ -1,9 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.savantly</groupId>
 	<artifactId>graphite-client</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.0-RELEASE</version>
 	<name>graphite-client</name>
 	<description>Connects to a carbon/graphite instance to push metrics</description>
 	<url>https://github.com/savantly-net/graphite-client</url>
@@ -15,6 +14,11 @@
 		<url>https://github.com/savantly-net/graphite-client/issues</url>
 		<system>GitHub</system>
 	</issueManagement>
+	<parent>
+		<groupId>net.savantly</groupId>
+		<artifactId>parent-pom</artifactId>
+		<version>1.0.0-RELEASE</version>
+	</parent>
 	<developers>
 		<developer>
 			<name>Jeremy Branham</name>
@@ -32,74 +36,6 @@
 		</license>
 	</licenses>
 	<inceptionYear>2016</inceptionYear>
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>2.4</version>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.3</version>
-						<executions>
-							<execution>
-								<id>javadoc</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>install</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-								<configuration>
-									<keyname>${gpg.keyname}</keyname>
-									<passphrase>${gpg.passphrase}</passphrase>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
-	<distributionManagement>
-		<downloadUrl>https://oss.sonatype.org/content/groups/public/net/savantly/graphite-client/</downloadUrl>
-		<repository>
-			<id>sonatype.staging</id>
-			<name>Sonatype Staging Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-		<snapshotRepository>
-			<id>sonatype.snapshots</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
