@@ -16,14 +16,11 @@ Use in Maven project -
 
 ## Reporting Example 
 
-	@Test
-	public void testWithHostAndPortParameters() throws UnknownHostException, SocketException {
-		GraphiteClient client = GraphiteClientFactory.defaultGraphiteClient("localhost", 2003);
-		
-		long epoch = System.currentTimeMillis()/1000;
-		CarbonMetric metric = new SimpleCarbonMetric("test.one", "123", epoch);
-		client.saveCarbonMetrics(metric);
-	}
+	GraphiteClient client = GraphiteClientFactory.defaultGraphiteClient("localhost", 2003);
+	
+	long epoch = System.currentTimeMillis()/1000;
+	CarbonMetric metric = new SimpleCarbonMetric("test.one", "123", epoch);
+	client.saveCarbonMetrics(metric);
 
 
 
