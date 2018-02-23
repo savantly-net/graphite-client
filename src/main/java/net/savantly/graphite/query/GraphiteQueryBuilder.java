@@ -4,7 +4,6 @@ import net.savantly.graphite.query.impl.FromImpl;
 import net.savantly.graphite.query.impl.TargetImpl;
 import net.savantly.graphite.query.impl.UntilImpl;
 
-@SuppressWarnings("rawtypes")
 public class GraphiteQueryBuilder<T> {
 	
 	private Target target;
@@ -21,11 +20,11 @@ public class GraphiteQueryBuilder<T> {
 		return target;
 	}
 
-	public GraphiteQueryBuilder setTarget(Target target) {
+	public GraphiteQueryBuilder<T> setTarget(Target target) {
 		this.target = target;
 		return this;
 	}
-	public GraphiteQueryBuilder setTarget(String target) {
+	public GraphiteQueryBuilder<T> setTarget(String target) {
 		this.target = new TargetImpl(target);
 		return this;
 	}
@@ -34,15 +33,15 @@ public class GraphiteQueryBuilder<T> {
 	public From getFrom() {
 		return from;
 	}
-	public GraphiteQueryBuilder setFrom(From from) {
+	public GraphiteQueryBuilder<T> setFrom(From from) {
 		this.from = from;
 		return this;
 	}
-	public GraphiteQueryBuilder setFrom(String from) {
+	public GraphiteQueryBuilder<T> setFrom(String from) {
 		this.from = new FromImpl(from);
 		return this;
 	}
-	public GraphiteQueryBuilder setFrom(int value, GraphiteTimeUnit unit) {
+	public GraphiteQueryBuilder<T> setFrom(int value, GraphiteTimeUnit unit) {
 		this.from = new FromImpl(value, unit);
 		return this;
 	}
@@ -51,15 +50,15 @@ public class GraphiteQueryBuilder<T> {
 	public Until getUntil() {
 		return until;
 	}
-	public GraphiteQueryBuilder setUntil(Until until) {
+	public GraphiteQueryBuilder<T> setUntil(Until until) {
 		this.until = until;
 		return this;
 	}
-	public GraphiteQueryBuilder setUntil(String until) {
+	public GraphiteQueryBuilder<T> setUntil(String until) {
 		this.until = new UntilImpl(until);
 		return this;
 	}
-	public GraphiteQueryBuilder setUntil(int value, GraphiteTimeUnit unit) {
+	public GraphiteQueryBuilder<T> setUntil(int value, GraphiteTimeUnit unit) {
 		this.until = new UntilImpl(value, unit);
 		return this;
 	}
@@ -73,7 +72,7 @@ public class GraphiteQueryBuilder<T> {
 		return template;
 	}
 
-	public GraphiteQueryBuilder setTemplate(Template template) {
+	public GraphiteQueryBuilder<T> setTemplate(Template template) {
 		this.template = template;
 		return this;
 	}
