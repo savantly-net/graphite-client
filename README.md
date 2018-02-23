@@ -9,7 +9,7 @@ Use in Maven project -
 	<dependency>
 		<groupId>net.savantly</groupId>
 		<artifactId>graphite-client</artifactId>
-		<version>1.0.0-RELEASE</version>
+		<version>2.0.0-RELEASE</version>
 	</dependency>
 ```
 
@@ -26,4 +26,18 @@ Use in Maven project -
 		CarbonMetric metric = new SimpleCarbonMetric("test.one", "123", epoch);
 		client.saveCarbonMetrics(metric);
 	}
+	
+	
+Query Graphite -  
+	
+	String graphiteHost = "localhost";
+	QueryableGraphiteClient client = GraphiteClientFactory.queryableGraphiteClient(graphiteHost);
+	
+	String target = "constantLine(123.456)";
+	
+	JsonFormatter formatter = new JsonFormatter();
+	GraphiteQueryBuilder<JsonNode> builder = new GraphiteQueryBuilder<>(formatter);
+	GraphiteQuery<JsonNode> query = builder.setTarget(target).build();
+	
+	JsonNode results = client.query(query);
 ```
