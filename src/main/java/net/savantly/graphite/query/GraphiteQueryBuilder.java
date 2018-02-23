@@ -30,23 +30,40 @@ public class GraphiteQueryBuilder<T> {
 		return this;
 	}
 
+	// FROM ************************
 	public From getFrom() {
 		return from;
 	}
-
 	public GraphiteQueryBuilder setFrom(From from) {
 		this.from = from;
 		return this;
 	}
+	public GraphiteQueryBuilder setFrom(String from) {
+		this.from = new FromImpl(from);
+		return this;
+	}
+	public GraphiteQueryBuilder setFrom(int value, GraphiteTimeUnit unit) {
+		this.from = new FromImpl(value, unit);
+		return this;
+	}
 
+	// UNTIL ************************
 	public Until getUntil() {
 		return until;
 	}
-
 	public GraphiteQueryBuilder setUntil(Until until) {
 		this.until = until;
 		return this;
 	}
+	public GraphiteQueryBuilder setUntil(String until) {
+		this.until = new UntilImpl(until);
+		return this;
+	}
+	public GraphiteQueryBuilder setUntil(int value, GraphiteTimeUnit unit) {
+		this.until = new UntilImpl(value, unit);
+		return this;
+	}
+	
 
 	public Formatter<T> getFormat() {
 		return format;

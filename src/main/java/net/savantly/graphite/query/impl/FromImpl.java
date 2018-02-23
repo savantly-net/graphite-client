@@ -9,6 +9,10 @@ public class FromImpl implements From {
 	
 	public FromImpl() { }
 	
+	public FromImpl(String value) {
+		this.value = value;
+	}
+	
 	public FromImpl(int value, GraphiteTimeUnit unit) {
 		this.value = String.format("%i%s", value, unit.value());
 	}

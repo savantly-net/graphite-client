@@ -9,9 +9,14 @@ public class UntilImpl implements Until {
 	
 	public UntilImpl() { }
 	
+	public UntilImpl(String until) {
+		this.value = until;
+	}
+	
 	public UntilImpl(int value, GraphiteTimeUnit unit) {
 		this.value = String.format("%i%s", value, unit.value());
 	}
+
 
 	@Override
 	public String value() {
