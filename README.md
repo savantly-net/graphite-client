@@ -14,9 +14,7 @@ Use in Maven project -
 ```
 
 
-## Example 
-
-```java
+## Reporting Example 
 
 	@Test
 	public void testWithHostAndPortParameters() throws UnknownHostException, SocketException {
@@ -26,9 +24,10 @@ Use in Maven project -
 		CarbonMetric metric = new SimpleCarbonMetric("test.one", "123", epoch);
 		client.saveCarbonMetrics(metric);
 	}
-	
-	
-Query Graphite -  
+
+
+
+## Query Example -  
 	
 	String graphiteHost = "localhost";
 	QueryableGraphiteClient client = GraphiteClientFactory.queryableGraphiteClient(graphiteHost);
@@ -40,4 +39,3 @@ Query Graphite -
 	GraphiteQuery<JsonNode> query = builder.setTarget(target).build();
 	
 	JsonNode results = client.query(query);
-```
