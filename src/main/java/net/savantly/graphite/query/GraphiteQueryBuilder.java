@@ -1,5 +1,9 @@
 package net.savantly.graphite.query;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import net.savantly.graphite.query.fomat.CsvFormatter;
+import net.savantly.graphite.query.fomat.JsonFormatter;
 import net.savantly.graphite.query.impl.FromImpl;
 import net.savantly.graphite.query.impl.TargetImpl;
 import net.savantly.graphite.query.impl.UntilImpl;
@@ -14,6 +18,18 @@ public class GraphiteQueryBuilder<T> {
 
 	public GraphiteQueryBuilder(Formatter<T> format) {
 		this.format = format;
+	}
+	
+	static public GraphiteQuery<JsonNode> simpleQuery(String target) {
+		return new GraphiteQueryBuilder<JsonNode>(new JsonFormatter())
+				.setTarget(target)
+				.build();
+	}
+	
+	static public GraphiteQuery<String> csvQuery(String target) {
+		return new GraphiteQueryBuilder<String>(new CsvFormatter())
+				.setTarget(target)
+				.build();
 	}
 
 	public Target getTarget() {
